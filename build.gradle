@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'net.minecrell.plugin-yml.bukkit' version '0.5.1'
+    id 'com.github.johnrengelman.shadow' version '7.1.1'
+}
+
+group 'io.github.zalyson.lobby'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    maven { url = 'https://jitpack.io' }
+
+    // Spigot
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // LuckPerms
+    compileOnly 'net.luckperms:api:5.4'
+
+    // Helper
+    implementation fileTree(dir: './libs', include: 'helper.jar');
+    implementation 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+}
+
+bukkit {
+    name = 'Lobby'
+    version = '1.0-SNAPSHOT'
+    main = 'io.github.zalyson.lobby.plugin.LobbyPlugin'
+    depend = ['helper']
+    load = 'STARTUP'
+    description = 'A complete lobby plugin'
+}
+
+java {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+tasks {
+    compileJava {
+        options.encoding = 'UTF-8'
+    }
+}
+
+shadowJar {
+    archiveFileName = 'lobby.jar'
+}
+
+artifacts {
+    archives shadowJar
+}
