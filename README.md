@@ -1,5 +1,5 @@
-###lobby-v1
+### lobby-v1
 A complete lobby plugin for a minecraft network. 
 
-###Stage
+### Stage
 Currently, in development.
